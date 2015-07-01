@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Blog后台管理</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/manage.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+  	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	  	<div class="container">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        	<span class="sr-only">Blog</span>
+		        	<span class="icon-bar"></span>
+		        	<span class="icon-bar"></span>
+		        	<span class="icon-bar"></span>
+		      	</button>
+		      	<a class="navbar-brand" href="index.html">Blog后台管理</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      	<ul class="nav navbar-nav navbar-top-links">
+		        	<li class="active"><a href="index.html" >首页 </a></li> 
+		        	<li class="dropdown">
+			          	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">功能 <span class="caret"></span></a>
+			          	<ul class="dropdown-menu" role="menu" id="myTab">
+				            <li><a href="#feature-tab"  data-tab="home">Home</a></li>
+				            <li><a href="#feature-tab" data-tab="profile">Profile</a></li>
+				            <li><a href="#feature-tab"  data-tab="messages">Messages</a></li>
+				            <li><a href="#feature-tab" data-tab="settings">Settings</a></li>
+			          	</ul>
+		        	</li>
+		        	<li><a data-toggle="modal" data-target="#myModal" href="">关于wo</a></li>
+		      	</ul>
+		      	<form class="navbar-form navbar-right" role="search">
+		        	<div class="form-group">
+		          		<input type="text" class="form-control" placeholder="用户名">
+		          		<input type="text" class="form-control" placeholder="密码">
+		        	</div>
+		        	<button type="button" class="btn btn-primary myButton" data-loading-text="Loading..." autocomplete="off">登录</button>
+
+		      	</form>
+		    </div><!-- /.navbar-collapse -->
+		</div>     <!-- /.navbar-top-links --> 
+	</nav>
+	<div class="container-fluid">
+        <div class="row">
+        	<!--侧边栏导航-->
+            <div class="col-md-2 sidebar">
+	            <ul class="nav nav-sidebar" id="menu">
+	            	
+		            <li>
+		                <a href="index.html" class="active"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;首页 </a>
+		            </li>
+
+
+		            <li>
+		                <a data-toggle="collapse" href="#collapse_one" class="vtitle"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;文章管理<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
+		                <ul class="nav collapse vcon" id="collapse_one">
+		                    <li>
+		                        <a href="addArticle.html"><span class="glyphicon glyphicon-menu-right pull-left"></span></span>&nbsp;&nbsp;添加文章</a>
+		                    </li>
+		                    <li>
+		                        <a href="modifyArticle.html"><span class="glyphicon glyphicon-menu-right pull-left"></span>&nbsp;&nbsp;修改文章</a>
+		                    </li>
+		                    <li>
+		                        <a href="deleteArticle.html"><span class="glyphicon glyphicon-menu-right pull-left"></span>&nbsp;&nbsp;删除文章</a>
+		                    </li>
+		                </ul>
+		                <!-- /.nav-second-level -->
+		            </li>
+		            <li>
+		                <a href="profile.html"><span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;&nbsp;个人资料</a>
+		            </li>
+		            <li>
+		                <a data-toggle="collapse" href="#collapse_two"  class="vtitle"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;&nbsp;设置<span class="glyphicon glyphicon-menu-down rotate pull-right"></span></a>
+		                <ul class="nav collapse in vcon" id="collapse_two">
+		                    <li>
+		                        <a href="info.html"><span class="glyphicon glyphicon-menu-right pull-left"></span>&nbsp;&nbsp;基本信息</a>
+		                    </li>
+		                    <li>
+		                        <a href="image.html"><span class="glyphicon glyphicon-menu-right pull-left"></span>&nbsp;&nbsp;头像</a>
+		                    </li>
+		                </ul>
+		                <!-- /.nav-second-level -->
+		            </li>
+		            <li>
+		                <a href="about.html"><span class="glyphicon glyphicon-barcode"></span>&nbsp;&nbsp;&nbsp;关于Blog</a>
+		            </li>
+		        </ul>
+		        
+            </div>
+            <!--内容-->
+            <div class="col-md-10 col-md-offset-2">
+            	<div class="jumbotron">
+  					<h1 class="text-center">表单</h1>
+				</div>
+            	<form class="form-inline">
+				  	<input type="text" class="span1" placeholder="span1">
+				  	<input type="password" class="span2" placeholder="span2">
+				  	<input type="password" class="span3" placeholder="span3">
+				    <div class="checkbox">
+				      	<label><input type="checkbox"> Remember me</label>
+				   	</div>
+				  	<button type="submit" class="btn">Sign in</button>
+				</form>
+        
+	            <!-- search form -->
+	            <form action="#" method="get" class="sidebar-form">
+	                <div class="input-group">
+	                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
+	                    <span class="input-group-btn">
+	                        <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+	                    </span>
+	                </div>
+	            </form>
+	            <!-- /.search form -->
+	            <!-- sidebar menu: : style can be found in sidebar.less -->
+	           	<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						 <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">网站名</a>
+						<div class="nav-collapse collapse navbar-responsive-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="#">主页</a>
+								</li>
+								<li>
+									<a href="#">链接</a>
+								</li>
+								<li>
+									<a href="#">链接</a>
+								</li>
+								<li class="dropdown">
+									 <a data-toggle="dropdown" class="dropdown-toggle" href="#">下拉菜单<strong class="caret"></strong></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">下拉导航1</a>
+										</li>
+										<li>
+											<a href="#">下拉导航2</a>
+										</li>
+										<li>
+											<a href="#">其他</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li class="nav-header">
+											标签
+										</li>
+										<li>
+											<a href="#">链接1</a>
+										</li>
+										<li>
+											<a href="#">链接2</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="nav pull-right">
+								<li>
+									<a href="#">右边链接</a>
+								</li>
+								<li class="divider-vertical">
+								</li>
+								<li class="dropdown">
+									 <a data-toggle="dropdown" class="dropdown-toggle" href="#">下拉菜单<strong class="caret"></strong></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">下拉导航1</a>
+										</li>
+										<li>
+											<a href="#">下拉导航2</a>
+										</li>
+										<li>
+											<a href="#">其他</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li>
+											<a href="#">链接3</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="page-header admin-header">
+		<h1> 后台登录 <small> creat by yr </small></h1>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="page-header">
+				<h3> 登录</h3>
+			</div>
+			<span style="height:40px;">GitHub</span>
+		    <div>
+			    <form class="form-horizontal" method="post">
+			      	<div class="form-group">
+						<div class="col-sm-3">
+							<label for="inputtext1" class="control-label">用户名：</label>
+						</div>
+						
+						<div class="col-sm-12">
+							<input type="text" class="form-control input-lg" name="username" id="inputtext1" placeholder="用户名">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-3">
+							<label for="inputtext2" class="control-label">密&nbsp;&nbsp;&nbsp;码：</label><br>
+						</div>
+						<div class="col-sm-12">
+							<input type="password" class="form-control input-lg" name="password" id="inputtext2" placeholder="密码">
+						</div>
+					</div>
+					<div class="has-success">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="checkboxSuccess" value="option1">
+								记住我
+							</label>
+						</div>
+					</div>
+			      	<div>
+			        	<input type="submit" name="" value="登 录" class="btn btn-primary">
+			        	<input type="submit" name="" value="忘记密码 ^_^? " class="btn pull-right">
+			      	</div>
+			    </form>
+			</div>
+		</div>
+	</div>
+	<footer class="blog-footer">
+		<p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+	</footer>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/manage.js"></script>
+
+    
+  </body>
+</html>

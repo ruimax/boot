@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>无标题</title>
+</head>
+<body>
+	<ul id = "myMenu" style="background-color:#ccc">
+		<li value="1">1111111111111111111111111111111</li>
+		<li value="2">22222222222222222222222222222222</li>
+		<li value="3">3333333333333333333333333333333333</li>
+	</ul>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script>
+		window.onload = function(){
+			$("li").on("click",function(event){
+		        alert($(this).attr("value"));
+        		//event.stopPropagation();
+		    });
+			/*var s = document.getElementById("myMenu");
+			s.onclick = function(event){
+				var x = event.target;
+				var a = x.data;
+				alert(a);
+				var y = $("a").attr("href");
+				alert(y);
+			};*/
+		};
+	</script>
+</body>
+</html>
