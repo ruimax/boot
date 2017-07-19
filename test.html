@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .modal_center{
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            margin: auto;
+            box-shadow: 0px 0px 3px #ccc;
+            z-index: 9999;
+            border-top: 2px solid #12c3d9;
+        }
+        .modal_header_wrapper{
+            height: 38px;
+            margin: 0 5px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+        .modal_header{
+            height: 24px;
+            border-left: 1px solid #12c3d9;
+            padding-left: 5px;
+            position: absolute;
+            margin: auto;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            text-align: center;
+            line-height: 24px;
+        }
+        .modal_header_content{
+            float: left;
+            font-size: 16px;
+        }
+        .close_icon{
+            height: 24px;
+            width: 24px;
+            float: right;
+            font-size: 20px;
+        }
+        .close_icon:hover{
+            cursor: pointer;
+        }
+        .modal_content{
+            margin-bottom: 70px;
+            text-align: center;
+            vertical-align: middle;
+            padding: 0px 10px;
+        }
+        .modal_footer{
+            height: 70px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .modal_footer button{
+            width: 100px;
+            height: 40px;
+            border-radius: 0px;
+            background-color: transparent;
+        }
+        .modal_footer .modal_ok_btn{
+            border: 1px solid #12c3d9;
+        }
+        .modal_footer .modal_cancle_btn{
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal_center" style="width:600px;height:400px;">
+        <div class="modal_header_wrapper">
+            <div class="modal_header">
+                <div class="modal_header_content">提示</div>
+                <div class="close_icon">×</div>
+            </div>
+        </div>
+        <div class="modal_content"></div>
+        <div class="modal_footer">
+            <button class="modal_ok_btn">确定</button>
+            <button class="modal_cancle_btn">取消</button>
+        </div>
+    </div>
+    <script>
+        var event = function(){
+            var events = {};
+            this.on = function(name,func){
+                if(events.hasOwnProperty(name)){
+                    events[name].push(func);
+                }
+                events[name] = [func];
+                console.log(events[name]);
+            };
+            this.fire = function(name){
+                if(!events.hasOwnProperty(name)){
+                    console.log('No this Event');
+                }else{
+                    for(var i=0;i<events[name].length;i++){
+                        events[name][i].apply(this);
+                    }
+                }
+            };
+            return this;
+        };
+
+        var $ = {};
+        $.extend = function(cfg, opt){
+            for(var key in opt){
+                if(opt.hasOwnProperty(key)){
+                    cfg[key] = opt[key];
+                }
+            }
+        }
+        $.window = function(option){
+            var cfg = {
+                width: 600,
+                height: 400,
+                is_close_icon: true,
+                is_footer: true,
+                is_ok_btn: true,
+                is_cancle_btn: true,
+                title: '提示',
+                content: ''
+            };
+            $.extend(cfg,option);
+            var modal = document.createElement('div');
+            modal.style.height = cfg.height + 'px';
+            modal.style.width = cfg.width + 'px';
+            modal.className += ' modal_center'
+            var tpl = [];
+            tpl.push('<div class="modal_header_wrapper">');
+            tpl.push('<div class="modal_header">');
+            tpl.push('<div class="modal_header_content">'+cfg.title+'</div>');
+            if(cfg.is_close_icon){
+                tpl.push('<div class="close_icon">×</div>');
+            }
+            tpl.push('</div></div>');
+            var contentHeight = cfg.height - 39 - 70;
+            tpl.push('<div class="modal_content" style="height:'+contentHeight+'px">'+cfg.content+'</div>');
+            if(cfg.is_footer){
+                tpl.push('<div class="modal_footer">');
+                if(is_ok_btn){
+                    tpl.push();
+                }
+                if(is_cancle_btn){
+                    tpl.push();
+                }
+                tpl.push('</div>');
+            }
+            tpl.push('</div>');
+            modal.innerHTML = tpl.join('');
+            document.body.appendChild(modal);
+        };
+        $.alert = function(){
+            var opt = {
+
+            };
+        };
+        $.confirm = function(){
+
+        };
+        $.succeed = function(){
+
+        };
+        window.$ = $;
+    </script>
+</body>
+</html>
