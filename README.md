@@ -6,3 +6,5 @@ test
 git diff
 
 git command
+
+conflict
