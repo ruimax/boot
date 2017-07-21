@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id='app' >
+		{{message}}
+		<simple-counter></simple-counter>
+		<simple-counter></simple-counter>
+		<simple-counter></simple-counter>
+		<input v-focus>
+	</div>
+
+	<div id="app_2" >
+	  	<span v-bind:title="message">
+	    	鼠标悬停几秒钟查看此处动态绑定的提示信息！
+	  	</span>
+	  	<div>
+	  		<input type="radio" v-model="picked" value="a">
+	  		<input type="radio" v-model="picked" value="b">
+	  	</div>
+	  	<p>{{picked}}</p>
+	  	<input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+	  	<p>{{toggle}}</p>
+	  	<select v-model="selected">
+		    <!-- 内联对象字面量 -->
+		  	<option v-bind:value="{ number: 123 }">123 {{selected}}</option>
+		</select>
+	</div>
+
+	<div id="app-3" v-demo:foo.a.b="message"></div>
+
+	<div id="app-4">
+	  	<ul>
+	    	<li v-for="todo in todos">
+	      		{{ todo.text }}
+	    	</li>
+	  	</ul>
+	</div>
+
+	<div id="app-5">
+	  	<p>{{ message }}</p>
+	  	<button v-on:click="reverseMessage">逆转消息</button>
+	</div>
+
+	<div id="app-6">
+	  	<p>{{message}}</p>
+	  	<input v-model='message'>
+	</div>
+
+	<div id="app-7">
+		<ol>
+		    <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+		</ol>
+	</div>
+	<div id='form-submit'>
+		<form-submit></form-submit>
+	</div>
+
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript">
+
+	const NotFound = { template: '<p>Page not found</p>' }
+	const Home = { template: '<p>home page</p>' }
+	const About = { template: '<p>about page</p>' }
+	const routes = {
+		'/': Home,
+		'/about': About
+	}
+	var app1 = new Vue({
+		el: '#app',
+		data: {
+			message: 'test',
+			parentMsg: 'parent'
+		},
+		components: {
+			'simple-counter': {
+				template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+				data: function(){
+					return {counter:0}
+				}
+			},
+			'parent':{
+				template: '<div></div>',
+				// /data:
+			},
+			'child': {
+				template: '<span>{{message}}</span>',
+				props: ['message']
+			},
+			'button-counter': {
+				template: '<button v-on:click="increment">{{ counter }}</button>',
+				data: function(){
+					return {
+						counter: 0
+					}
+				},
+				methods: {
+					increment: function(){
+						this.counter += 1;
+						this.$emit('increment');
+					}
+				}
+			}
+		},
+		directives: {
+			focus: {
+ 				inserted: function(el){
+					el.focus()
+				}
+			}
+		}
+	});
+	var app2 = new Vue({
+		el: '#app_2',
+		data:{
+			message: 'page load in '+new Date(),
+			picked: '',
+			toggle: '',
+			a: 'true',
+			b: 'false',
+			selected: ''
+		}
+	})
+	var app3 = new Vue({
+		el: '#app-3',
+		data: {
+			seen: true,
+			test: {
+				a:1,
+				b:2
+			},
+			message: 'test'
+		},
+		components: {
+			'my-component': '\
+				<div>\
+					<h2>我是子组件的标题</h2>\
+					<slot>\
+						只有在没有要分发的内容时才会显示。\
+					</slot>\
+				</div>\
+			',
+			data: function(){
+				return {};
+			}
+		},
+		directives: {
+			demo: {
+				bind: function(el,binding,vnode){
+					var s = JSON.stringify;
+					console.log(el);
+					var str =
+						'name: '       + s(binding.name) + '<br>' +
+ 						'value: '      + s(binding.value) + '<br>' +
+ 						'expression: ' + s(binding.expression) + '<br>' +
+ 						'argument: '   + s(binding.arg) + '<br>' +
+ 						'modifiers: '  + s(binding.modifiers) + '<br>' +
+ 						'vnode keys: ' + Object.keys(vnode).join(', ');
+						console.log(str);
+					el.innerHTMl = str;
+				}
+			}
+		}
+
+	})
+	var app4 = new Vue({
+		el: '#app-4',
+		data: {
+			todos:[
+				{'text':1},
+				{'text':2},
+				{'text':3},
+			]
+		}
+	})
+	var app5 = new Vue({
+		el: '#app-5',
+		data: {
+			message: 'Event',
+		},
+		methods: {
+			reverseMessage: function(){
+				this.message = this.message.split('').reverse().join('');
+			}
+		}
+	})
+	var app6 = new Vue({
+		el: '#app-6',
+		data: {
+			message: 'irui',
+			currentRoute: window.location.pathname
+		},
+		computed: {
+			ViewComponent () {
+			  	return routes[this.currentRoute] || NotFound
+			}
+		},
+		render (h) { return h(this.ViewComponent) }
+	})
+	/*Vue.component('todo-item',{
+		props: ['todo'],
+		template: '<li>{{todo.text}}</li>'
+	})
+	var app7 = new Vue({
+		el: '#app-7',
+		data: {
+			groceryList: [
+				{id:0,text:'javascript'},
+				{id:1,text:'vue'}
+			]
+		}
+	})*/
+	Vue.component('todo-item', {
+		props: ['todo'],
+		template: '<li>{{ todo.text }}</li>'
+	})
+	var app7 = new Vue({
+		el: '#app-7',
+		data: {
+			groceryList: [
+		  		{ id: 0, text: '蔬菜' },
+		  		{ id: 1, text: '奶酪' },
+		  		{ id: 2, text: '随便其他什么人吃的东西' }
+			]
+		}
+	})
+	var app8 = new Vue({
+		el: '#form-submit',
+		components: {
+			'form-submit': {
+				template: '\
+				<form v-on:submit="submit">\
+		            <div class="field field-username">\
+		                <div><label for="username">用户名</label></div>\
+		                <input type="text" placeholder="请输入用户名" />\
+		            </div>\
+		            <div class="field field-password">\
+		                <div><label for="password">密码</label></div>\
+		                <input type="password" placeholder="请输入密码" />\
+		            </div>\
+		            <div class="field field-captcha">\
+		                <div><label for="captcha">验证码</label></div>\
+		                <input type="text" placeholder="请输入验证码" />\
+		            </div>\
+		            <p class="button-wrapper">\
+		                <button class="button" type="submit">\
+		                    <i class="fa fa-arrow-right" aria-hidden="true"></i>\
+		                    登录\
+		                </button>\
+		            </p>\
+		        	</form>\
+				',
+				methods: {
+					submit: function(e) {
+						//e.preventDefault();
+					}
+				}
+			}
+		}
+	})
+	// app_test.message = 'Hello';
+</script>
+</body>
+</html>
