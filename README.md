@@ -7,6 +7,10 @@ git diff
 
 git command
 
+
 testing branch
 
 newReadme
+
+conflict
+
