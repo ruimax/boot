@@ -3,8 +3,9 @@ var VueRouter = require('vue-router');
 Vue.use(VueRouter);
 
 var routes = require('./routes')
-console.log(routes);
+
 var router = new VueRouter({
+    //mode: 'history',
     routes
 });
 

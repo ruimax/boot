@@ -1,6 +1,8 @@
 <div>
-    <h1>Index Hello</h1>
+    <h2 style="font-weight:100;">Index Hello</h2>
     <hr>
     <p>Hello World Index!</p>
-    <p><a v-link="{path:'/list'}">List Page</a></p>
+    <div><router-link to="/list">Go to List</router-link></div>
+    <router-link to="/tab1">Tab1</router-link> <router-link to="/tab2">Tab2</router-link>
+    <router-view></router-view>
 </div>
